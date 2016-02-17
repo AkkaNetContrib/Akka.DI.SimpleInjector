@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.DI.SimpleInjector", "Akka.DI.SimpleInjector\Akka.DI.SimpleInjector.csproj", "{FA988CED-56BD-4D65-A3EA-E7A0D6205619}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.DI.SimpleInjector.Tests", "Akka.DI.SimpleInjector.Tests\Akka.DI.SimpleInjector.Tests.csproj", "{32212476-59FD-4C34-AE1E-5621F6AAA75D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA988CED-56BD-4D65-A3EA-E7A0D6205619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA988CED-56BD-4D65-A3EA-E7A0D6205619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA988CED-56BD-4D65-A3EA-E7A0D6205619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA988CED-56BD-4D65-A3EA-E7A0D6205619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32212476-59FD-4C34-AE1E-5621F6AAA75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32212476-59FD-4C34-AE1E-5621F6AAA75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32212476-59FD-4C34-AE1E-5621F6AAA75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32212476-59FD-4C34-AE1E-5621F6AAA75D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
