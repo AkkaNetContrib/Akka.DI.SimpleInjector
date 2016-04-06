@@ -48,15 +48,11 @@ namespace Akka.DI.SimpleInjector
         {
             return () =>
             {
-                var container = _container;
+                var scope = _container.BeginExecutionContextScope();
 
-                var references = _references;
+                var actor = (ActorBase)_container.GetInstance(actorType);
 
-                var scope = container.BeginExecutionContextScope();
-
-                var actor = (ActorBase)container.GetInstance(actorType);
-
-                references.Add(actor, scope);
+                _references.Add(actor, scope);
  
                 return actor;
             };
