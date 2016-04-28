@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.DI.SimpleInjector", "Akka.DI.SimpleInjector\Akka.DI.SimpleInjector.csproj", "{FA988CED-56BD-4D65-A3EA-E7A0D6205619}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akka.DI.SimpleInjector.Tests", "Akka.DI.SimpleInjector.Tests\Akka.DI.SimpleInjector.Tests.csproj", "{32212476-59FD-4C34-AE1E-5621F6AAA75D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{14E5DE06-291F-40EE-A2FE-4B5F580313C2}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.fsx = ..\build.fsx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
