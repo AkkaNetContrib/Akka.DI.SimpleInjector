@@ -1,15 +1,22 @@
-﻿using System.Reflection;
+﻿//-----------------------------------------------------------------------
+// <copyright file="WindsorDependencyResolver.cs" company="Akka.NET Project">
+//     Copyright (C) 2009-2016 Lightbend Inc. <http://www.lightbend.com>
+//     Copyright (C) 2013-2016 Akka.NET project <https://github.com/akkadotnet/akka.net>
+// </copyright>
+//-----------------------------------------------------------------------
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Akka.DI.SimpleInjector.Tests")]
+[assembly: AssemblyTitle("Akka.DI.SimpleInjector")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Akka.DI.SimpleInjector.Tests")]
+[assembly: AssemblyProduct("Akka.DI.SimpleInjector")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("32212476-59fd-4c34-ae1e-5621f6aaa75d")]
+[assembly: Guid("fa988ced-56bd-4d65-a3ea-e7a0d6205619")]
 
 // Version information for an assembly consists of the following four values:
 //
