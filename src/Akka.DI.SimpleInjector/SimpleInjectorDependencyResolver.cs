@@ -1,7 +1,6 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="WindsorDependencyResolver.cs" company="Akka.NET Project">
-//     Copyright (C) 2009-2016 Lightbend Inc. <http://www.lightbend.com>
-//     Copyright (C) 2013-2016 Akka.NET project <https://github.com/akkadotnet/akka.net>
+// <copyright file="SimpleInjectorDependencyResolver.cs" company="Akka.NET Project">
+//     Copyright (C) 2013-2017 Akka.NET project <https://github.com/akkadotnet/akka.net>
 // </copyright>
 //-----------------------------------------------------------------------
 
@@ -11,7 +10,7 @@ using System.Runtime.CompilerServices;
 using Akka.Actor;
 using Akka.DI.Core;
 using SimpleInjector;
-using SimpleInjector.Extensions.ExecutionContextScoping;
+using SimpleInjector.Lifestyles;
 using SI = SimpleInjector;
 
 namespace Akka.DI.SimpleInjector
@@ -25,23 +24,12 @@ namespace Akka.DI.SimpleInjector
  
         public SimpleInjectorDependencyResolver(Container container, ActorSystem actorSystem)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            if (actorSystem == null)
-            {
-                throw new ArgumentNullException("actorSystem");
-            }
-
-            _container = container;
-
-            _actorSystem = actorSystem;
+            _container = container ?? throw new ArgumentNullException(nameof(container));
+            _actorSystem = actorSystem ?? throw new ArgumentNullException(nameof(actorSystem));
 
             _actorSystem.AddDependencyResolver(this);
 
-            _typeCache = new ConcurrentDictionary<string, Type>(StringComparer.InvariantCultureIgnoreCase);
+            _typeCache = new ConcurrentDictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
             _references = new ConditionalWeakTable<ActorBase, SI.Scope>();
         }
@@ -55,7 +43,7 @@ namespace Akka.DI.SimpleInjector
         {
             return () =>
             {
-                var scope = _container.BeginExecutionContextScope();
+                var scope = AsyncScopedLifestyle.BeginScope(_container);
 
                 var actor = (ActorBase)_container.GetInstance(actorType);
 
