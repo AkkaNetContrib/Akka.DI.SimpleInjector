@@ -31,8 +31,8 @@ Target "Clean" (fun _ ->
     CleanDir outputBinaries
     CleanDir outputNuGet
 
-    CleanDirs !! "./**/bin"
-    CleanDirs !! "./**/obj"
+    CleanDirs !! "./src/**/bin"
+    CleanDirs !! "./src/**/obj"
 )
 
 Target "RestorePackages" (fun _ ->
@@ -112,11 +112,70 @@ Target "PublishNuget" (fun _ ->
 )
 
 //--------------------------------------------------------------------------------
+// Help 
+//--------------------------------------------------------------------------------
+
+Target "Help" <| fun _ ->
+    List.iter printfn [
+      "usage:"
+      "build [target]"
+      ""
+      " Targets for building:"
+      " * Build      Builds"
+      " * Nuget      Create and optionally publish nugets packages"
+      " * RunTests   Runs tests"
+      " * All        Builds, run tests, creates and optionally publish nuget packages"
+      ""
+      " Other Targets"
+      " * Help       Display this help" 
+      " * HelpNuget  Display help about creating and pushing nuget packages" 
+      ""]
+
+Target "HelpNuget" <| fun _ ->
+    List.iter printfn [
+      "usage: "
+      "build Nuget [nugetkey=<key> [nugetpublishurl=<url>]] "
+      "            [symbolskey=<key> symbolspublishurl=<url>] "
+      "            [nugetprerelease=<prefix>]"
+      ""
+      "Arguments for Nuget target:"
+      "   nugetprerelease=<prefix>   Creates a pre-release package."
+      "                              The version will be version-prefix<date>"
+      "                              Example: nugetprerelease=dev =>"
+      "                                       0.6.3-dev1408191917"
+      ""
+      "In order to publish a nuget package, keys must be specified."
+      "If a key is not specified the nuget packages will only be created on disk"
+      "After a build you can find them in bin/nuget"
+      ""
+      "For pushing nuget packages to nuget.org and symbols to symbolsource.org"
+      "you need to specify nugetkey=<key>"
+      "   build Nuget nugetKey=<key for nuget.org>"
+      ""
+      "For pushing the ordinary nuget packages to another place than nuget.org specify the url"
+      "  nugetkey=<key>  nugetpublishurl=<url>  "
+      ""
+      "For pushing symbols packages specify:"
+      "  symbolskey=<key>  symbolspublishurl=<url> "
+      ""
+      "Examples:"
+      "  build Nuget                      Build nuget packages to the bin/nuget folder"
+      ""
+      "  build Nuget nugetprerelease=dev  Build pre-release nuget packages"
+      ""
+      "  build Nuget nugetkey=123         Build and publish to nuget.org and symbolsource.org"
+      ""
+      "  build Nuget nugetprerelease=dev nugetkey=123 nugetpublishurl=http://abc"
+      "              symbolskey=456 symbolspublishurl=http://xyz"
+      "                                   Build and publish pre-release nuget packages to http://abc"
+      "                                   and symbols packages to http://xyz"
+      ""]
+
+//--------------------------------------------------------------------------------
 //  Target dependencies
 //--------------------------------------------------------------------------------
 
 Target "BuildRelease" DoNothing
-Target "All" DoNothing
 Target "Nuget" DoNothing
 
 // build dependencies
@@ -130,6 +189,9 @@ Target "Nuget" DoNothing
 "CreateNuget" ==> "PublishNuget" ==> "Nuget"
 
 // all
+Target "All" DoNothing
 "BuildRelease" ==> "All"
+"RunTests" ==> "All"
+"Nuget" ==> "All"
 
-RunTargetOrDefault "All"
+RunTargetOrDefault "Help"
