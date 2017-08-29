@@ -25,6 +25,10 @@ let versionSuffix =
     | "dev" -> preReleaseVersionSuffix
     | _ -> ""
 
+let releaseNotes =
+    File.ReadLines "./RELEASE_NOTES.md"
+    |> ReleaseNotesHelper.parseReleaseNotes
+
 Target "Clean" (fun _ ->
     CleanDir output
     CleanDir outputTests
@@ -33,6 +37,11 @@ Target "Clean" (fun _ ->
 
     CleanDirs !! "./src/**/bin"
     CleanDirs !! "./src/**/obj"
+)
+
+Target "AssemblyInfo" (fun _ ->
+    XmlPokeInnerText "./src/Akka.DI.SimpleInjector/Akka.DI.SimpleInjector.csproj" "//Project/PropertyGroup/VersionPrefix" releaseNotes.AssemblyVersion    
+    XmlPokeInnerText "./src/Akka.DI.SimpleInjector/Akka.DI.SimpleInjector.csproj" "//Project/PropertyGroup/PackageReleaseNotes" (releaseNotes.Notes |> String.concat "\n")
 )
 
 Target "RestorePackages" (fun _ ->
@@ -179,13 +188,13 @@ Target "BuildRelease" DoNothing
 Target "Nuget" DoNothing
 
 // build dependencies
-"Clean" ==> "RestorePackages" ==> "Build" ==> "BuildRelease"
+"Clean" ==> "RestorePackages" ==> "Build" ==> "AssemblyInfo" ==> "BuildRelease"
 
 // tests dependencies
 "Clean" ==> "RestorePackages" ==> "RunTests"
 
 // nuget dependencies
-"Clean" ==> "RestorePackages" ==> "Build" ==> "CreateNuget"
+"BuildRelease" ==> "CreateNuget"
 "CreateNuget" ==> "PublishNuget" ==> "Nuget"
 
 // all
