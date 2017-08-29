@@ -10,7 +10,7 @@ using Akka.Actor;
 using Akka.DI.Core;
 using Akka.DI.TestKit;
 using SimpleInjector;
-using SimpleInjector.Extensions.ExecutionContextScoping;
+using SimpleInjector.Lifestyles;
 using Xunit;
 
 namespace Akka.DI.SimpleInjector.Tests
@@ -21,7 +21,7 @@ namespace Akka.DI.SimpleInjector.Tests
         {
             var container =  new Container();
 
-            container.Options.DefaultScopedLifestyle = new ExecutionContextScopeLifestyle();
+            container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             return container;
         }
